@@ -152,6 +152,9 @@ include
 add_executable(laser_reader_node src/laser_reader.cpp)
 target_link_libraries(laser_reader_node ${catkin_LIBRARIES})
 
+add_executable(laser_subscriber_node src/laser_subscriber.cpp)
+target_link_libraries(laser_subscriber_node ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
