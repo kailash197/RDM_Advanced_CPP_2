@@ -2,6 +2,7 @@
 #include "ros/node_handle.h"
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
+#include <utility>
 
 class LaserSubscriberNode {
 private:
@@ -16,6 +17,7 @@ protected:
 public:
   LaserSubscriberNode();
   ~LaserSubscriberNode(){};
+  float printClosestObstacleDistance() const;
 };
 
 LaserSubscriberNode::LaserSubscriberNode() {
@@ -33,10 +35,32 @@ void LaserSubscriberNode::init_laser_subscriber() {
 void LaserSubscriberNode::laser_callback(
     const sensor_msgs::LaserScanConstPtr &msg) {
   laser_scan = msg.get();
-  int front_index = 360;
+  printClosestObstacleDistance();
+}
 
-  float distance = laser_scan->ranges[front_index];
-  ROS_INFO("Distance at front: %f", distance);
+float LaserSubscriberNode::printClosestObstacleDistance() const {
+  if (!laser_scan) {
+    ROS_WARN("No laser scan data available.");
+    return std::numeric_limits<float>::infinity();
+  }
+
+  float min_distance = std::numeric_limits<float>::infinity();
+  int min_index = 0;
+
+  for (int i = 0; i < 720; i++) {
+    if (std::isfinite(laser_scan->ranges[i]) &&
+        laser_scan->ranges[i] < min_distance) {
+      min_distance = laser_scan->ranges[i];
+      min_index = i;
+    }
+  }
+
+  float closest_ang =
+      laser_scan->angle_min + min_index * laser_scan->angle_increment;
+  ROS_INFO("Closest obstacle distance: %f at angle: %f", min_distance,
+           closest_ang);
+
+  return closest_ang;
 }
 
 int main(int argc, char **argv) {
