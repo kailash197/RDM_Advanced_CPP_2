@@ -6,7 +6,7 @@
 
 class LaserSubscriberNode {
 private:
-  const sensor_msgs::LaserScan *laser_scan = nullptr;
+  std::shared_ptr<sensor_msgs::LaserScan> laser_scan = nullptr;
 
 protected:
   ros::NodeHandle nh_;
@@ -34,7 +34,7 @@ void LaserSubscriberNode::init_laser_subscriber() {
 
 void LaserSubscriberNode::laser_callback(
     const sensor_msgs::LaserScanConstPtr &msg) {
-  laser_scan = msg.get();
+  laser_scan = std::make_shared<sensor_msgs::LaserScan>(*msg);
   printClosestObstacleDistance();
 }
 
