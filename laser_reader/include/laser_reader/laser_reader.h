@@ -9,8 +9,8 @@ private:
   ros::Subscriber laser_sub;
   void laser_callback(const sensor_msgs::LaserScan::ConstPtr &laser_msg);
 
-  /* DEFINE HERE THE POINTER TO THE LASER RANGES ARRAY */
-  float *last_laser_ranges;
+  float *last_ten_scans[10]; // create 10 pointers in stack
+  //   float **last_ten_scans; //= new float *[10]; create in heap
 
 public:
   TurtleClass();
