@@ -9,7 +9,9 @@ int main(int argc, char **argv) {
   MagicPrinter magic_printer_object(_n);
 
   int value_integer = 42;
-  magic_printer_object.PrintInteger(value_integer);
+  magic_printer_object.PrintGeneric<int>(value_integer);
+  string value_string = "Adventure Time is Back!";
+  magic_printer_object.PrintGeneric<string>(value_string);
 
   return 0;
 }
