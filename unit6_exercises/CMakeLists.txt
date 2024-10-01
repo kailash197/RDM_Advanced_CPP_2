@@ -11,6 +11,8 @@ add_compile_options(-std=c++17)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
+  cv_bridge
+  std_msgs
 )
 
 catkin_package(
@@ -36,6 +38,7 @@ add_library(magic_tsub_class_library
 add_library(magic_tsub_function_library
   src/topic_subscriber_function.cpp
 )
+
 
 ## Create executables
 add_executable(main_magic_printer_node src/main_magic_printer.cpp)
@@ -64,3 +67,7 @@ target_link_libraries(basic_example_u6_specialization_functions_node
 add_library(specialised_example_library src/specialised_example.cpp)
 add_executable(main_specialised_example_node src/main_specialised_example.cpp)
 target_link_libraries(main_specialised_example_node specialised_example_library ${catkin_LIBRARIES})
+
+add_library(magic_subscriber_image_edgedetector_library src/magic_subscriber_image_edgedetector.cpp)
+add_executable(main_edge_detector_node src/main_edge_detector.cpp)
+target_link_libraries(main_edge_detector_node magic_subscriber_image_edgedetector_library ${catkin_LIBRARIES})
