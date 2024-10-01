@@ -60,3 +60,7 @@ add_executable(basic_example_u6_specialization_functions_node src/basic_example_
 target_link_libraries(basic_example_u6_specialization_functions_node
 	${catkin_LIBRARIES}
 )
+
+add_library(specialised_example_library src/specialised_example.cpp)
+add_executable(main_specialised_example_node src/main_specialised_example.cpp)
+target_link_libraries(main_specialised_example_node specialised_example_library ${catkin_LIBRARIES})
