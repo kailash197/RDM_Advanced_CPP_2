@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(unit6_exercises)
+set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+set(CMAKE_C_COMPILER "/usr/bin/clang")
 
+add_compile_options(-std=c++17)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++17)
 
@@ -48,3 +51,7 @@ target_link_libraries(main_topic_class_node magic_tsub_class_library ${catkin_LI
 target_link_libraries(main_pcl_topic_subscriber_node magic_tsub_function_library ${catkin_LIBRARIES})
 
 
+add_executable(basic_example_u6_specialization_node src/basic_example_u6_specialization.cpp)
+target_link_libraries(basic_example_u6_specialization_node
+	${catkin_LIBRARIES}
+)
