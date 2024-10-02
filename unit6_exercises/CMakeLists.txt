@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
   cv_bridge
+  pcl_conversions
   std_msgs
 )
 
@@ -71,3 +72,8 @@ target_link_libraries(main_specialised_example_node specialised_example_library 
 add_library(magic_subscriber_image_edgedetector_library src/magic_subscriber_image_edgedetector.cpp)
 add_executable(main_edge_detector_node src/main_edge_detector.cpp)
 target_link_libraries(main_edge_detector_node magic_subscriber_image_edgedetector_library ${catkin_LIBRARIES})
+
+
+add_library(magic_subscriber_pcl2image_library src/magic_subscriber_pcl2image.cpp)
+add_executable(main_pcl2image_node src/main_pcl2image.cpp)
+target_link_libraries(main_pcl2image_node magic_subscriber_pcl2image_library ${catkin_LIBRARIES})
