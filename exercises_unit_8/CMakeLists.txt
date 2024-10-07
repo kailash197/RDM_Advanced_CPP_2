@@ -2,13 +2,15 @@ cmake_minimum_required(VERSION 3.0.2)
 project(exercises_unit_8)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  std_msgs
+  robot_commander
 )
 
 ## System dependencies are found with CMake's conventions
@@ -114,7 +116,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -147,6 +149,14 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+
+add_executable(validate_user_input src/validate_user_input.cpp)
+# add_dependencies(validate_user_input ${validate_user_input_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(validate_user_input ${catkin_LIBRARIES})
+
+install(TARGETS validate_user_input
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 #############
 ## Install ##
