@@ -41,11 +41,14 @@ add_library(magic_tsub_function_library
 )
 
 
+
+
 ## Create executables
 add_executable(main_magic_printer_node src/main_magic_printer.cpp)
 add_executable(main_topic_function_node src/main_topic_subscriber_function.cpp)
 add_executable(main_topic_class_node src/main_topic_subscriber_class.cpp)
 add_executable(main_pcl_topic_subscriber_node src/main_pcl_topic_subscriber.cpp)
+
 
 
 ## Specify libraries to link a library or executable target against
@@ -77,3 +80,7 @@ target_link_libraries(main_edge_detector_node magic_subscriber_image_edgedetecto
 add_library(magic_subscriber_pcl2image_library src/magic_subscriber_pcl2image.cpp)
 add_executable(main_pcl2image_node src/main_pcl2image.cpp)
 target_link_libraries(main_pcl2image_node magic_subscriber_pcl2image_library ${catkin_LIBRARIES})
+
+add_library(specialised_complete_library src/specialised_complete.cpp)
+add_executable(main_specialised_complete_node src/main_specialised_complete.cpp)
+target_link_libraries(main_specialised_complete_node specialised_complete_library ${catkin_LIBRARIES})
